@@ -1,3 +1,4 @@
+//@ts-check
 const { query, nullToUndefined } = require("@simpleview/sv-graphql-client");
 
 /**
@@ -21,6 +22,7 @@ class CmsAdminPrefix {
 	 * @property {string} env
 	 * @property {string} [branch]
 	 * @property {string} [alias]
+	 * @property {string} [remote]
 	 * @property {string} [push_notification_email]
 	*/
 	/**
@@ -57,8 +59,7 @@ class CmsAdminPrefix {
 	}
 	/**
 	 * @typedef ProcessPullRequestInput
-	 * @property {string} owner
-	 * @property {string} repo
+	 * @property {string} client
 	 * @property {number} num
 	*/
 	/**
