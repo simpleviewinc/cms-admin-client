@@ -94,6 +94,43 @@ class CmsAdminPrefix {
 		
 		return returnData;
 	}
+	/**
+	 * @typedef UnDeployClientInput
+	 * @property {string} client
+	 * @property {string} env
+	*/
+	/**
+	 * @param {BaseArgs & { input: UnDeployClientInput }} args
+	*/
+	async undeploy_client({ input, fields, context, headers }) {
+		context = context || this._graphServer.context;
+
+		const variables = {
+			input
+		}
+
+		const response = await query({
+			query : `
+				mutation($input: cms_admin_undeploy_client_input!) {
+					cms_admin {
+						undeploy_client(input: $input) {
+							${fields}
+						}
+					}
+				}
+			`,
+			variables,
+			url : this._graphUrl,
+			token : context.token,
+			headers
+		});
+
+		const returnData = response.cms_admin.undeploy_client;
+		
+		nullToUndefined(returnData);
+		
+		return returnData;
+	}
 }
 
 module.exports = CmsAdminPrefix;
