@@ -132,7 +132,14 @@ class CmsAdminPrefix {
 		return returnData;
 	}
 
-	async create_client_project({input, fields, context, headers}) {
+	/**
+	 * @typedef createClientProject
+	 * @property {string} name
+	*/
+	/**
+	 * @param {BaseArgs & { input: createClientProject }} args
+	*/
+	async create_client_project({ input, fields, context, headers }) {
 		context = context || this._graphServer.context;
 
 		const variables = {
@@ -141,15 +148,20 @@ class CmsAdminPrefix {
 
 		const response = await query({
 			query : `
-				mutation($name : String!){
-					cms_admin{
-						create_client_project(input:{name: $name}){success,message}
+				mutation($input: cms_admin_create_client_project_input!) {
+					cms_admin {
+						create_client_project(input: $input) {
+							${fields}
+						}
 					}
-				}`,
+				}
+			`,
 			variables,
 			url : this._graphUrl,
-			token: context.token
+			token : context.token,
+			headers
 		});
+
 		const returnData = response.cms_admin.create_client_project;
 		
 		nullToUndefined(returnData);
