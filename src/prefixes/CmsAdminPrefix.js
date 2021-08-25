@@ -131,6 +131,31 @@ class CmsAdminPrefix {
 		
 		return returnData;
 	}
+
+	async create_client_project({input, fields, context, headers}) {
+		context = context || this._graphServer.context;
+
+		const variables = {
+			input
+		}
+
+		const response = await query({
+			query : `
+				mutation($name : String!){
+					cms_admin{
+						create_client_project(input:{name: $name}){success,message}
+					}
+				}`,
+			variables,
+			url : this._graphUrl,
+			token: context.token
+		});
+		const returnData = response.cms_admin.create_client_project;
+		
+		nullToUndefined(returnData);
+		
+		return returnData;
+	}
 }
 
 module.exports = CmsAdminPrefix;
