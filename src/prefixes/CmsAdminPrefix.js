@@ -168,6 +168,82 @@ class CmsAdminPrefix {
 		
 		return returnData;
 	}
+
+	/**
+	 * @typedef monitorClient
+	 * @property {string} client
+	 * @property {string} env
+	*/
+	/**
+	 * @param {BaseArgs & { input: monitorClient }} args
+	*/
+	async monitor_client({ input, fields, context, headers }) {
+		context = context || this._graphServer.context;
+
+		const variables = {
+			input
+		}
+
+		const response = await query({
+			query : `
+				mutation($input: cms_admin_client_monitor_input!) {
+					cms_admin {
+						monitor_client(input: $input) {
+							${fields}
+						}
+					}
+				}
+			`,
+			variables,
+			url : this._graphUrl,
+			token : context.token,
+			headers
+		});
+
+		const returnData = response.cms_admin.monitor_client;
+		
+		nullToUndefined(returnData);
+		
+		return returnData;
+	}
+	
+	/**
+	 * @typedef unmonitorClient
+	 * @property {string} client
+	 * @property {string} env
+	*/
+	/**
+	 * @param {BaseArgs & { input: unmonitorClient }} args
+	*/
+	async unmonitor_client({ input, fields, context, headers }) {
+		context = context || this._graphServer.context;
+
+		const variables = {
+			input
+		}
+
+		const response = await query({
+			query : `
+				mutation($input: cms_admin_client_monitor_input!) {
+					cms_admin {
+						unmonitor_client(input: $input) {
+							${fields}
+						}
+					}
+				}
+			`,
+			variables,
+			url : this._graphUrl,
+			token : context.token,
+			headers
+		});
+
+		const returnData = response.cms_admin.unmonitor_client;
+		
+		nullToUndefined(returnData);
+		
+		return returnData;
+	}
 }
 
 module.exports = CmsAdminPrefix;
