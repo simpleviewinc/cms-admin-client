@@ -224,7 +224,7 @@ class CmsAdminPrefix {
 
 		const response = await query({
 			query : `
-				mutation($input: cms_admin_client_monitor_input!) {
+				mutation($input: cms_admin_client_unmonitor_input!) {
 					cms_admin {
 						unmonitor_client(input: $input) {
 							${fields}
