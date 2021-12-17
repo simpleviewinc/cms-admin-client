@@ -98,6 +98,8 @@ class CmsAdminPrefix {
 	 * @typedef UnDeployClientInput
 	 * @property {string} client
 	 * @property {string} env
+	 * @property {string} forceCluster
+	 * @property {boolean} keepDb
 	*/
 	/**
 	 * @param {BaseArgs & { input: UnDeployClientInput }} args
