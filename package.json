@@ -4,7 +4,7 @@
 	"description": "Client for communicating with cms-admin",
 	"author": "Owen Allen <owenallenaz@gmail.com>",
 	"peerDependencies": {
-		"@simpleview/sv-graphql-client": "*"
+		"@simpleview/sv-graphql-client": "2.0.1"
 	},
 	"main": "src/index.js",
 	"scripts": {
